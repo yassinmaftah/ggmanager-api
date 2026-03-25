@@ -24,9 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::middleware('role:player')->group(function () {});
 
-    Route::post('/tournaments/{tournament}/register', [RegistrationController::class, 'store']);
+    Route::post('/tournaments/{tournament}/join', [RegistrationController::class, 'store']);
     Route::post('/tournaments/{tournament}/close', [StatusController::class, 'close']);
 });
 
-Route::get('/tournaments', [App\Http\Controllers\TournamentController::class, 'index']);
+Route::get('/tournaments', [App\http\Controllers\TournamentController::class, 'index']);
 Route::get('/tournaments/{tournament}', [App\Http\Controllers\TournamentController::class, 'show']);

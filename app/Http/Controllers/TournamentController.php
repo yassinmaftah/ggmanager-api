@@ -95,7 +95,8 @@ class TournamentController extends Controller
 
         $tournament->delete();
 
-        return response()->json(null, 204);
+        return response()->json([
+            'message' => 'Tournament deleted successfully'], 204);
     }
 
 
