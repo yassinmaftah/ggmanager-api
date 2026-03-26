@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
+use App\Jobs\GenerateBracketJob;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -19,6 +20,8 @@ class StatusController extends Controller
             return response()->json(['message' => 'Only open tournaments can be closed.'], 400);
 
         $tournament->update(['status' => 'closed']);
+
+        GenerateBracketJob::dispatch($tournament);
 
         return response()->json(['message' => 'Tournament has been closed successfully.'], 200);
     }
