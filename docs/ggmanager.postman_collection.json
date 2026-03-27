@@ -13,7 +13,7 @@
       "name": "Auth",
       "item": [
         {
-          "name": "Register",
+          "name": "Register (player)",
           "request": {
             "method": "POST",
             "url": "{{base_url}}/register",
@@ -21,6 +21,18 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\",\n  \"role\": \"player\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Register (organizer)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Accept", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Organizer\",\n  \"email\": \"organizer@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\",\n  \"role\": \"organizer\"\n}"
             }
           }
         },
@@ -69,7 +81,15 @@
           "name": "List Tournaments",
           "request": {
             "method": "GET",
-            "url": "{{base_url}}/tournaments",
+            "url": {
+              "raw": "{{base_url}}/tournaments?game=Valorant&status=open",
+              "host": ["{{base_url}}"],
+              "path": ["tournaments"],
+              "query": [
+                { "key": "game", "value": "Valorant", "disabled": true },
+                { "key": "status", "value": "open", "disabled": true }
+              ]
+            },
             "header": [{ "key": "Accept", "value": "application/json" }]
           }
         },
