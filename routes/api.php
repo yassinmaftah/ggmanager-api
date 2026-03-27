@@ -13,7 +13,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/tournaments', [TournamentController::class, 'index']);
 Route::get('/tournaments/{tournament}', [TournamentController::class, 'show']);
-Route::get('/tournaments/{tournament}/bracket', [BracketController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -23,7 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/tournaments', [TournamentController::class, 'store']);
         Route::put('/tournaments/{tournament}', [TournamentController::class, 'update']);
         Route::delete('/tournaments/{tournament}', [TournamentController::class, 'destroy']);
-
         Route::post('/tournaments/{tournament}/close', [StatusController::class, 'close']);
         Route::post('/matches', [MatchController::class, 'store']);
         Route::post('/matches/{match}/score', [MatchController::class, 'submitScore']);
@@ -32,4 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:player')->group(function () {
         Route::post('/tournaments/{tournament}/join', [RegistrationController::class, 'store']);
     });
+
+    Route::get('/tournaments/{id}/bracket', [BracketController::class, 'show']);
 });
