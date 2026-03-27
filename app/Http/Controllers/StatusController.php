@@ -22,6 +22,8 @@ class StatusController extends Controller
 
         $tournament->update(['status' => 'closed']);
 
+        GenerateBracketJob::dispatch($tournament);
+
         return $this->success(null, 'Tournament has been closed successfully.');
     }
 }
