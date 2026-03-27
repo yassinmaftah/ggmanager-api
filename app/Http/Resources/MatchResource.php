@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,10 +24,8 @@ class MatchResource extends JsonResource
 
             'winner' => $this->whenLoaded(
                 'winner',
-                fn() => $this->winner ? new UseResource($this->winner) : null
+                fn() => $this->winner ? new UserResource($this->winner) : null
             ),
-
-            'played_at' => $this->played_at?->toIso8601String(),
         ];
     }
 }
