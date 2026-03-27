@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class TournamentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $tournaments = Tournament::with('organizer:id,name')->get();
+        $tournaments = Tournament::with('organizer:id,name')
+            ->when($request->game, fn($q) => $q->where('game', $request->game))
+            ->when($request->status, fn($q) => $q->where('status', $request->status))
+            ->get();
         return $this->success(TournamentResource::collection($tournaments));
     }
 
