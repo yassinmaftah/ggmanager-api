@@ -22,6 +22,13 @@ class Registration extends Model
         'registered_at' => 'datetime',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($registration) {
+            $registration->registered_at ??= now();
+        });
+    }
+
 
     public function user(): BelongsTo
     {

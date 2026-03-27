@@ -13,9 +13,8 @@ class GenerateBracketJob implements ShouldQueue
 
     public function __construct(public Tournament $tournament) {}
 
-    public function handle(): void
+    public function handle(BracketService $service): void
     {
-        $service = new BracketService();
         $service->makeTree($this->tournament);
     }
 }

@@ -14,18 +14,17 @@ class BracketResource extends JsonResource
             ->groupBy('round_number')
             ->map(fn($matches, $roundNumber) => [
                 'round'   => (int) $roundNumber,
-                'label'   => $this->resolveRoundLabel((int) $roundNumber, $this->total_rounds),
+                'label'   => $this->resolveRoundLabel((int) $roundNumber, (int) $this->matches->max('round_number')),
                 'matches' => MatchResource::collection($matches),
             ])
             ->values();
 
         return [
             'tournament' => [
-                'id'           => $this->id,
-                'name'         => $this->name,
-                'game'         => $this->game,
-                'status'       => $this->status,
-                'total_rounds' => $this->total_rounds,
+                'id'     => $this->id,
+                'name'   => $this->name,
+                'game'   => $this->game,
+                'status' => $this->status,
             ],
             'bracket' => $rounds,
         ];
