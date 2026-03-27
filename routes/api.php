@@ -6,6 +6,7 @@ use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\Api\BracketController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -25,7 +26,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tournaments/{tournament}/close', [StatusController::class, 'close']);
     Route::post('/matches', [MatchController::class, 'store']);
     Route::post('/matches/{match}/score', [MatchController::class, 'submitScore']);
+    Route::get('/tournaments/{id}/bracket', [BracketController::class, 'show']);
 });
-
-Route::get('/tournaments', [App\http\Controllers\TournamentController::class, 'index']);
-Route::get('/tournaments/{tournament}', [App\Http\Controllers\TournamentController::class, 'show']);
