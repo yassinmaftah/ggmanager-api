@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,9 +16,8 @@ class TournamentResource extends JsonResource
             'date'             => $this->date?->toIso8601String(),
             'max_participants' => $this->max_participants,
             'status'           => $this->status,
-            'total_rounds'     => $this->total_rounds,
 
-            'organizer' => $this->whenLoaded('organizer', fn() => new UseResource($this->organizer)),
+            'organizer' => $this->whenLoaded('organizer', fn() => new UserResource($this->organizer)),
 
             'registrations' => $this->whenLoaded(
                 'registrations',
