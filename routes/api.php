@@ -5,7 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\Api\BracketController;
 use App\Http\Controllers\MatchController;
 
 Route::post('/register', [AuthController::class, 'register']);
